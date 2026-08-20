@@ -5,8 +5,9 @@ import (
 	"fmt"
 	"time"
 
+	"uuid"
+
 	"github.com/HT4w5/ivpn/internal/domain/acl"
-	"github.com/google/uuid"
 )
 
 type ID uuid.UUID
@@ -50,10 +51,7 @@ func NewKey(
 
 	secret, _ := GenerateSecret(method) // Error not possible.
 
-	id, err := uuid.NewV7()
-	if err != nil {
-		return nil, fmt.Errorf("failed to generate id: %w", err)
-	}
+	id := uuid.NewV7()
 
 	createdAt := time.Now().UTC()
 	var expiresAt time.Time
